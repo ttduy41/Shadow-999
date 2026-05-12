@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHADOW - Shop Uy Tín</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #0d1117; color: #e6edf3; font-family: sans-serif; }
+        .cyber-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
+        .neon-text { color: #58a6ff; text-shadow: 0 0 5px #58a6ff; }
+        .btn-buy { background: #238636; color: white; width: 100%; padding: 10px; border-radius: 6px; font-weight: bold; }
+        .admin-panel { border: 2px solid #f85149; margin-top: 20px; display: none; }
+        /* Menu 3 gạch */
+        #side-menu { position: fixed; left: -250px; top: 0; width: 250px; height: 100%; background: #010409; transition: 0.3s; z-index: 1000; padding: 20px; }
+        #side-menu.active { left: 0; }
+        .menu-item { padding: 12px; border-bottom: 1px solid #30363d; display: block; }
+    </style>
+</head>
+<body>
+
+<div class="flex justify-between items-center p-4 bg-[#161b22] sticky top-0 z-50">
+    <i class="fas fa-bars text-2xl" onclick="toggleMenu()"></i>
+    <div class="font-bold text-xl neon-text">SHADOW.COM</div>
+    <div id="user-info" class="text-sm"></div>
+</div>
+
+<div id="side-menu">
+    <div class="text-right"><i class="fas fa-times" onclick="toggleMenu()"></i></div>
+    <a href="#" class="menu-item"><i class="fas fa-home mr-2"></i> Trang Chủ</a>
+    <a href="#" onclick="showSection('nap-tien')" class="menu-item"><i class="fas fa-wallet mr-2"></i> Nạp Tiền</a>
+    <a href="#" onclick="showSection('lich-su')" class="menu-item"><i class="fas fa-history mr-2"></i> Lịch Sử Giao Dịch</a>
+    <div id="admin-menu-item" style="display:none">
+        <a href="#" onclick="showSection('admin-panel')" class="menu-item text-red-500 font-bold"><i class="fas fa-user-shield mr-2"></i> Quản Lý Admin</a>
+    </div>
+    <a href="https://t.me/+ktWnTQrZAKthYmZl" class="menu-item text-blue-400"><i class="fab fa-telegram mr-2"></i> Telegram Group</a>
+    <a href="https://zalo.me/84364684151" class="menu-item text-blue-500"><i class="fas fa-phone mr-2"></i> Zalo Admin</a>
+</div>
+
+<div class="p-4" id="main-content">
+    <div id="auth-section" class="cyber-card">
+        <h2 class="text-center font-bold mb-4">ĐĂNG NHẬP / ĐĂNG KÝ</h2>
+        <input id="auth-user" type="text" placeholder="Tên đăng nhập hoặc Email" class="w-full p-2 mb-2 bg-[#0d1117] border border-[#30363d]">
+        <input id="auth-pass" type="password" placeholder="Mật khẩu" class="w-full p-2 mb-2 bg-[#0d1117] border border-[#30363d]">
+        <button onclick="handleLogin()" class="btn-buy mb-2">Đăng Nhập</button>
+        <button onclick="handleRegister()" class="w-full p-2 border border-[#30363d] rounded">Đăng Ký Tài Khoản</button>
+    </div>
+
+    <div id="shop-section" style="display:none">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="cyber-card">
+                <img src="LINK_ANH_LV5" class="w-full rounded mb-2">
+                <h3 class="font-bold">Acc Lv5 Google</h3>
+                <p class="text-sm text-gray-400">Đăng nhập google, sẵn combo kĩ năng...</p>
+                <div class="text-green-400 font-bold my-2">Giá: 2.500đ</div>
+                <button onclick="buyKey('lv5', 2500)" class="btn-buy">MUA NGAY</button>
+            </div>
+
+            <div class="cyber-card">
+                <img src="LINK_ANH_LY_TIM" class="w-full rounded mb-2">
+                <h3 class="font-bold text-purple-400">Drip Silent (New)</h3>
+                <p class="text-xs text-gray-400">Menu antiband update thường xuyên, lưu ý log acc clone trước...</p>
+                <select id="time-drip" class="w-full bg-black mt-2 p-1 border border-gray-700">
+                    <option value="60000">1 Ngày - 60k</option>
+                    <option value="100000">7 Ngày - 100k</option>
+                    <option value="160000">30 Ngày - 160k</option>
+                </select>
+                <button onclick="buyKey('drip', 'select')" class="btn-buy mt-2">MUA NGAY</button>
+            </div>
+            
+            <div class="cyber-card">
+                <img src="LINK_ANH_ZYGAME" class="w-full rounded mb-2">
+                <h3 class="font-bold text-yellow-400">Zygame (New)</h3>
+                <p class="text-xs text-gray-400">Menu antiband update thường xuyên, lưu ý log acc clone trước...</p>
+                <div class="flex gap-2 mt-2">
+                    <select id="type-zy" class="w-1/2 bg-black p-1 border border-gray-700"><option>FFTH</option><option>FFM</option></select>
+                    <select id="time-zy" class="w-1/2 bg-black p-1 border border-gray-700">
+                        <option value="30000">1 Ngày - 30k</option>
+                        <option value="80000">7 Ngày - 80k</option>
+                        <option value="130000">30 Ngày - 130k</option>
+                    </select>
+                </div>
+                <button onclick="buyKey('zygame', 'select')" class="btn-buy mt-2">MUA NGAY</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Hệ thống lưu trữ dữ liệu giả lập (Auto-save vào LocalStorage)
+    let userData = JSON.parse(localStorage.getItem('shadow_user')) || null;
+    let adminAccount = { user: "shadow+999", pass: "HV0308hv" };
+
+    function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
+
+    function handleLogin() {
+        const u = document.getElementById('auth-user').value;
+        const p = document.getElementById('auth-pass').value;
+        if(u === adminAccount.user && p === adminAccount.pass) {
+            userData = { user: u, role: 'admin', balance: 9999999 };
+            alert("Chào Admin Hoàng Vinh!");
+        } else {
+            userData = { user: u, role: 'user', balance: 0 };
+        }
+        localStorage.setItem('shadow_user', JSON.stringify(userData));
+        location.reload();
+    }
+
+    // Tự động đăng nhập khi vào lại web
+    window.onload = () => {
+        if(userData) {
+            document.getElementById('auth-section').style.display = 'none';
+            document.getElementById('shop-section').style.display = 'block';
+            document.getElementById('user-info').innerText = `${userData.user} | ${userData.balance}đ`;
+            if(userData.role === 'admin') document.getElementById('admin-menu-item').style.display = 'block';
+        }
+    }
+
+    function buyKey(type, price) {
+        alert("Tính năng mua tự động đang kết nối Admin duyệt tiền...");
+    }
+</script>
+</body>
+</html>
